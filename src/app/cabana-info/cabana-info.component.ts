@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CabanaSharedService } from '../shared/cabana.shared.service';
 import { Router } from '@angular/router';
@@ -18,11 +17,9 @@ export class CabanaInfoComponent implements OnInit {
 			];
 	locations = [];
 
-	constructor(public snackBar: MatSnackBar,
-		private formBuilder: FormBuilder,
+	constructor(private formBuilder: FormBuilder,
 		private sharedService: CabanaSharedService,
-		private router: Router,
-		public dialog: MatDialog) { }
+		private router: Router) { }
 
 	ngOnInit() {
 		this.cabanaInformationForm = this.formBuilder.group({
@@ -81,5 +78,4 @@ export class CabanaInfoComponent implements OnInit {
 			this.router.navigate(['/cabana/cabana-map-position']);
 		}
 	}
-
 }

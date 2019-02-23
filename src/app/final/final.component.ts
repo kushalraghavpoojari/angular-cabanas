@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CabanaSharedService } from '../shared/cabana.shared.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
 import { Cabana } from '../models/cabana.model';
 import { LocationModel } from '../models/location.model';
 
@@ -13,7 +12,7 @@ export class FinalComponent implements OnInit {
     cabana:Cabana;
     locations:Array<LocationModel>;
     finalOutput:any = {};
-    constructor(private sharedService: CabanaSharedService, public snackBar: MatSnackBar, public dialog: MatDialog) { }
+    constructor(private sharedService: CabanaSharedService) { }
 
     ngOnInit() {
         this.cabana = this.sharedService.getCabana();
