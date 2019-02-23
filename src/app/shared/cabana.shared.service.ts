@@ -129,7 +129,7 @@ export class CabanaSharedService {
     setRadius(diameter = 150, hasRadius: boolean, locationIndex: number) {
         this.diameter = diameter * this.scalerService.getCurrentScaleFactor();
         this.radius = hasRadius ? this.diameter / 2 : 0;
-        if (hasRadius && locationIndex) {
+        if (hasRadius && locationIndex !== undefined) {
             this.setLocationDiameter(locationIndex, this.diameter);
         }
     }
