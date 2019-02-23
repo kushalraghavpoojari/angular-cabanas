@@ -5,6 +5,8 @@ import { Cabana } from '../models/cabana.model';
 import { LocationModel } from '../models/location.model';
 import { Resource } from '../models/resource.model';
 import { UserOptions } from '../models/userOptions.model';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { ModalComponent } from './Modal/modal.component';
 
 @Injectable()
 export class CabanaSharedService {
@@ -19,7 +21,7 @@ export class CabanaSharedService {
     private currentSelectedLocation: LocationModel;
     private userOptions: UserOptions;
 
-    constructor(private http: HttpClient, private scalerService: CabanaScalerService) { }
+    constructor(private http: HttpClient, private scalerService: CabanaScalerService, public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
     setImageName(isMapImage:boolean, locationIndex:number, imageName:string) {
         if (isMapImage) {
@@ -183,5 +185,21 @@ export class CabanaSharedService {
 
     getUserOptions():UserOptions {
         return this.userOptions;
+    }
+
+    notifyUser(modalInfo, snackBarInfo, width = '550px') {
+        const userOptions = this.getUserOptions(),
+            notifyWithDialog = userOptions.notifyUsingModal();
+        if (notifyWithDialog) {
+            this.dialog.open(ModalComponent, {
+                width: width,
+                data: {
+                    info: modalInfo.info,
+                    additionalInfo: modalInfo.additionalInfo
+                }
+            });
+        } else {
+            this.snackBar.open(snackBarInfo, 'Got it');
+        }
     }
 }

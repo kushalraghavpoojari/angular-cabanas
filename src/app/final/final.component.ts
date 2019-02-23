@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CabanaSharedService } from '../shared/cabana.shared.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { Cabana } from '../models/cabana.model';
 import { LocationModel } from '../models/location.model';
 
@@ -13,11 +13,11 @@ export class FinalComponent implements OnInit {
     cabana:Cabana;
     locations:Array<LocationModel>;
     finalOutput:any = {};
-    constructor(private sharedService: CabanaSharedService, public snackBar: MatSnackBar) { }
+    constructor(private sharedService: CabanaSharedService, public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
     ngOnInit() {
         this.cabana = this.sharedService.getCabana();
-        this.locations = this.cabana.locations;
+        this.locations = this.cabana.locations || [];
         this.getOutputObject();
     }
 
@@ -54,17 +54,22 @@ export class FinalComponent implements OnInit {
     }
 
     copyText() {
-        let selBox = document.createElement('textarea');
-        selBox.style.position = 'fixed';
-        selBox.style.left = '0';
-        selBox.style.top = '0';
-        selBox.style.opacity = '0';
-        selBox.value = JSON.stringify(this.finalOutput, null, 2);;
-        document.body.appendChild(selBox);
-        selBox.focus();
-        selBox.select();
+        const modalInfo = {
+                info: 'Copied to clipboard',
+                additionalInfo: ''
+            },
+            snackBarInfo = 'Copied to clipboard',
+            tempTextElement = document.createElement('textarea');
+        tempTextElement.style.position = 'fixed';
+        tempTextElement.style.left = '0';
+        tempTextElement.style.top = '0';
+        tempTextElement.style.opacity = '0';
+        tempTextElement.value = JSON.stringify(this.finalOutput, null, 2);;
+        document.body.appendChild(tempTextElement);
+        tempTextElement.focus();
+        tempTextElement.select();
         document.execCommand('copy');
-        document.body.removeChild(selBox);
-        this.snackBar.open('Copied to clipboard', 'Got it');
+        document.body.removeChild(tempTextElement);
+        this.sharedService.notifyUser(modalInfo, snackBarInfo, '350px');
     }
 }

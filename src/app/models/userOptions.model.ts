@@ -14,4 +14,8 @@ export class UserOptions {
         this.modal = modal;
         this.snackBar = snackbar;
     }
+
+    notifyUsingModal() {
+        return this.modal;
+    }
 }

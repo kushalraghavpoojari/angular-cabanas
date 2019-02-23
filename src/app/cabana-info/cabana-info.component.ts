@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CabanaSharedService } from '../shared/cabana.shared.service';
 import { Router } from '@angular/router';
-import { ModalComponent } from '../shared/Modal/modal.component';
 
 @Component({
 	selector: 'app-cabana-info',
@@ -18,9 +17,6 @@ export class CabanaInfoComponent implements OnInit {
 				'brevard', 'demo', 'demoUS', 'demoSWPOC', 'demoSki', 'demoCulture', 'DemoHK', 'DemoUK', 'SixFlagsV3'
 			];
 	locations = [];
-	info:string;
-
-	@Input() stepper;
 
 	constructor(public snackBar: MatSnackBar,
 		private formBuilder: FormBuilder,
@@ -38,33 +34,33 @@ export class CabanaInfoComponent implements OnInit {
 		console.log(this.sharedService.getUserOptions());
 	}
 
-	addControl() {
+	addControl():void {
 		this.locations.forEach((location) => {
 			this.cabanaInformationForm.addControl(location.name, new FormControl('', Validators.required));
 			this.cabanaInformationForm.addControl(location.resources, new FormControl('', Validators.required));
 			this.cabanaInformationForm.addControl(location.resourceId, new FormControl());
 		});
 	}
-	
-	openSnackBar(snackBarType: string) {
-		if (snackBarType === 'charac') {
-			this.snackBar.open('Please follow "cabanapopup-[island-shorthand]-[cabana-type]" format', 'Got it');
-		} else if (snackBarType === 'image') {
-			this.snackBar.open('Please enter the full map image name with extension', 'Got it');
+
+	notifyUser(type: string):void {
+		const characModalInfo = {
+				info :'Please follow "cabanapopup-[island-shorthand]-[cabana-type]" format',
+				additionalInfo: 'Eg: cabanapopup-pelc-standard'
+			},
+			imageModalInfo = {
+				info: 'Please enter the full map image name with extension',
+				additionalInfo: 'Eg: fullImageName.jpg'
+			},
+			characSnackbarInfo = 'Please follow "cabanapopup-[island-shorthand]-[cabana-type]" format',
+			imageSnackBarInfo = 'Please enter the full map image name with extension';
+		if (type === 'charac') {
+			this.sharedService.notifyUser(characModalInfo, characSnackbarInfo);
+		} else if (type === 'image') {
+			this.sharedService.notifyUser(imageModalInfo, imageSnackBarInfo);
 		}
 	}
 
-	openDialog():void {
-		this.dialog.open(ModalComponent, {
-			width: '550px',
-			data: {
-				info: 'Please follow "cabanapopup-[island-shorthand]-[cabana-type]" format',
-				additionalInfo: 'Eg: cabanapopup-pelc-standard'
-			}
-		});
-	}
-
-	buildLocations(event) {
+	buildLocations(event):void {
 		console.log(event.target.value)
 		this.locations.length = 0;
 		for (let i = 0; i< event.target.value; i++) {
@@ -78,7 +74,7 @@ export class CabanaInfoComponent implements OnInit {
 		this.addControl();
 	}
 
-	onClickNext() {
+	onClickNext():void {
 		const formValues = this.cabanaInformationForm.value;
 		this.sharedService.setCabanaInformation(formValues);
 		if (this.cabanaInformationForm.status === 'VALID') {

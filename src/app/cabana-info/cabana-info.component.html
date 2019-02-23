@@ -9,8 +9,7 @@
 					<mat-label>Cabana charac</mat-label>
 					<input matInput formControlName="charac" required>
 				</mat-form-field>
-				<!-- <mat-icon color="primary" (click)="openSnackBar('charac')">error</mat-icon> -->
-				<mat-icon color="primary" (click)="openDialog()">error</mat-icon>
+				<mat-icon color="primary" (click)="notifyUser('charac')">error</mat-icon>
 			</div>
 			<div>
 				<mat-form-field appearance="fill">
@@ -26,7 +25,7 @@
 					<mat-label>Image name</mat-label>
 					<input matInput formControlName="imageName" required>
 				</mat-form-field>
-				<mat-icon color="primary" (click)="openSnackBar('image')">error</mat-icon>
+				<mat-icon color="primary" (click)="notifyUser('image')">error</mat-icon>
 			</div>
 			<div>
 				<mat-form-field appearance="fill">
