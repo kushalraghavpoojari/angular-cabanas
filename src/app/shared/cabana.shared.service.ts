@@ -90,7 +90,7 @@ export class CabanaSharedService {
         reader.onload = () => {
             this.image = null;
             this.image = new Image();
-            this.image.src = reader.result;
+            this.image.src = reader.result as string;
         }
 
         reader.onloadend = () => {
