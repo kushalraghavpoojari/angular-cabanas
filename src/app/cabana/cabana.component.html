@@ -1,0 +1,18 @@
+<div fxLayout="column" fxLayoutGap="40px" class="cabana-container">
+	<div fxLayout>
+		<mat-card [routerLink]="['/map']">
+			Cabanas Map
+			<mat-icon color="primary">my_location</mat-icon>
+		</mat-card>
+		<mat-card [routerLink]="['/resource']">
+			Cabanas Resource
+			<mat-icon color="primary">pin_drop</mat-icon>
+		</mat-card>
+		<mat-card [routerLink]="['']">
+			Home
+			<mat-icon color="primary">home</mat-icon>
+		</mat-card>
+		<div class="spacer"></div>
+	</div>
+	<router-outlet></router-outlet>
+</div>

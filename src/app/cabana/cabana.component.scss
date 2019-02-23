@@ -1,0 +1,13 @@
+@import '../../styles/mixins.scss';
+
+.cabana-container {
+    margin-left:10px;
+    mat-card {
+        margin-left: 5px;
+        margin-right: 5px;
+        height: 30px;
+        padding: 10px;
+        cursor: pointer;
+        @include transform(30px, 1.2);
+    }
+}

@@ -1,0 +1,25 @@
+<div class="home-container">
+    <!-- <button mat-mini-fab class="dark-theme" color="primary">
+        <mat-icon (click)="toggleDarkTheme()">star_half</mat-icon>
+    </button> -->
+    
+    <mat-grid-list cols="1" rowHeight="2:1">
+        <mat-grid-tile>
+            <div fxLayout>
+                <mat-card class="zoom" [routerLink]="['/cabana']">
+                    New Cabanas
+                    <mat-icon color="primary">home</mat-icon>
+                </mat-card>
+                <mat-card class="zoom">
+                    Cabanas Map
+                    <mat-icon color="primary">my_location</mat-icon>
+                </mat-card>
+                <mat-card class="zoom">
+                    Cabanas Resource
+                    <mat-icon color="primary">pin_drop</mat-icon>
+                </mat-card>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+

@@ -1,0 +1,21 @@
+@import '../../styles/mixins.scss';
+
+.location {
+    cursor: pointer;
+    @include transform(30px, 1.2);
+}
+
+.location-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.disabled {
+    color: gray;
+    background: #8c84842b;
+}
+
+.selected {
+    background-color: #3f51b5;
+    color: white;
+}

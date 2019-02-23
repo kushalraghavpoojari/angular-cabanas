@@ -1,0 +1,17 @@
+<div fxLayout="column">
+    <mat-menu #appMenu="matMenu" xPosition="before" [overlapTrigger]="false">
+        <div mat-menu-item>
+            <mat-slide-toggle [checked]="enabledarkMode" (change)="toggleDarkMode($event)">Dark Mode</mat-slide-toggle>
+        </div>
+        <div mat-menu-item>
+            <mat-slide-toggle [checked]="enableModal" (change)="toggleEnableModal($event)">Modal</mat-slide-toggle>
+        </div>
+        <div mat-menu-item>
+            <mat-slide-toggle [checked]="enableSnackBar" (change)="toggleEnableSnackBar($event)">SnackBar</mat-slide-toggle>
+        </div>
+    </mat-menu>
+    <div class="moveRight" mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon color="primary">menu</mat-icon>
+    </div>
+    <router-outlet></router-outlet>
+</div>

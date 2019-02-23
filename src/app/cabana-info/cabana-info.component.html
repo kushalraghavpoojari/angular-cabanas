@@ -1,0 +1,83 @@
+
+<form [formGroup]="cabanaInformationForm" style="height: 60vh">
+	<div fxLayout="row">
+		<div fxLayout="column">
+			<h4>Cabana Information</h4>
+			<!-- <mat-label>Cabana Information</mat-label> -->
+			<div>
+				<mat-form-field appearance="fill">
+					<mat-label>Cabana charac</mat-label>
+					<input matInput formControlName="charac" required>
+				</mat-form-field>
+				<!-- <mat-icon color="primary" (click)="openSnackBar('charac')">error</mat-icon> -->
+				<mat-icon color="primary" (click)="openDialog()">error</mat-icon>
+			</div>
+			<div>
+				<mat-form-field appearance="fill">
+					<mat-label>Number of locations</mat-label>
+					<input type="number" matInput formControlName="numberOfLocations" (change)="buildLocations($event)" required>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlexOffset="100px" fxLayout="column">
+			<h4>Cabana Image Information</h4>
+			<div>
+				<mat-form-field appearance="fill">
+					<mat-label>Image name</mat-label>
+					<input matInput formControlName="imageName" required>
+				</mat-form-field>
+				<mat-icon color="primary" (click)="openSnackBar('image')">error</mat-icon>
+			</div>
+			<div>
+				<mat-form-field appearance="fill">
+					<mat-label>Island</mat-label>
+					<input matInput formControlName="island" required>
+				</mat-form-field>
+			</div>
+			<div>
+				<mat-form-field appearance="fill">
+					<mat-select placeholder="Island">
+						<mat-option *ngFor="let island of islands" [value]="island">
+							{{island}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div fxFlexOffset="100px" fxLayout="column" *ngIf="locations.length">
+			<h4>Cabana Location Information</h4>
+			<mat-accordion>
+				<div *ngFor="let location of locations; index as i">
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								Location {{i+1}} information
+							</mat-panel-title>
+							<mat-panel-description>
+								Type location details
+							</mat-panel-description>
+						</mat-expansion-panel-header>
+						<div fxLayout="column">
+							<mat-form-field appearance="fill">
+								<mat-label>Location {{i+1}} name</mat-label>
+								<input matInput formControlName="{{location.name}}" required>
+							</mat-form-field>
+							<mat-form-field appearance="fill" fxFlexOffset="20px">
+								<mat-label># of Resources for Location {{i+1}}</mat-label>
+								<input matInput type="number" formControlName="{{location.resources}}" required>
+							</mat-form-field>
+							<mat-form-field appearance="fill" fxFlexOffset="20px">
+								<mat-label>Start Index</mat-label>
+								<input matInput type="number" formControlName="{{location.resourceId}}">
+							</mat-form-field>
+						</div>
+					</mat-expansion-panel>
+				</div>
+			</mat-accordion>
+		</div>
+	</div>
+</form>
+<div>
+	<button mat-button mat-raised-button [disabled]="cabanaInformationForm.status==='INVALID'" color="primary" (click)="onClickNext($event)">Next</button>
+</div>

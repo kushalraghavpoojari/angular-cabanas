@@ -1,0 +1,41 @@
+.upload-input {
+    display: none;
+}
+
+.upload-button {
+    margin-right: 20px;
+}
+
+.cabana-view {
+    width: 950px;
+    position: relative;
+    margin-bottom: 20px;
+
+}
+
+.cabana-map {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resource-text {
+    position: absolute;
+    left: 40%;
+}
+
+.resourceElement {
+    background-color: #00cd00;
+    border: 2px solid #ffffff;
+    color: white;
+    position: absolute;
+    padding-top: 3px;
+    z-index: 1;
+    top: 0px;
+    left: 154px;
+    display: none;
+    .ng-resizable-diagonal {
+        border-bottom-width: 0;
+        border-left-width: 0;
+    }
+}

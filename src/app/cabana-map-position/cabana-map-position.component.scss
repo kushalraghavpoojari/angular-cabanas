@@ -1,0 +1,41 @@
+
+.upload-input {
+    display: none;
+}
+
+.upload-button {
+    margin-right: 20px;
+}
+
+.cabana-view {
+    width: 950px;
+    position: relative;margin-bottom: 20px;
+
+}
+
+.cabana-map {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.circle-text {
+    background: #fff;
+    color: #000;
+    position: absolute;
+    text-align: center;
+    display: none;
+}
+
+.circleElement {
+    background-color: rgba(163,0,0,0.7);
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    height:150px;
+    width:150px;
+    top: 0px;
+    left: 154px;
+    display:none;
+}

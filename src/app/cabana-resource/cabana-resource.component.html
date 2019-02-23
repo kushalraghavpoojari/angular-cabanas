@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutGap="30px" style="height: 60vh">
+    <div fxLayout="column" fxLayoutGap="30px">
+            <div>Location Selected: {{selectedLocation.name}}</div>
+            <div fxLayout>
+                <input id="fileInput2" type="file" class="upload-input" (change)="onImageUpload($event)">
+                <button mat-raised-button color="primary" class="upload-button" (click)="uploadImage('fileInput2')">Upload</button>
+                <button mat-button mat-raised-button color="primary" (click)="addResource()" [disabled]="resourcesAdded">Add Resource</button>
+            </div>
+    </div>
+    <div class="cabana-view" id="cabana-resource-view">
+        <div 
+            ngDraggable
+            ngResizable
+            *ngFor="let resource of resources; index as i"
+            class="resourceElement resizable-widget"
+            id="dragable-resource-element-{{i}}"
+            [rzHandles]="'se'"
+            [rzAspectRatio]="false"
+            (rzStop)="onResizeStop($event, i)"
+            (endOffset)="onMoveEnd($event, i)"
+        >
+            <span class="resource-text" id="cabana-resource-name-{{i}}">{{resource.resourceId}}</span>
+        </div>
+    </div>
+</div>
+<div fxLayout fxLayoutGap="15px">
+    <button mat-button mat-raised-button (click)="goBack()">Back</button>
+    <button mat-button mat-raised-button color="primary" (click)="nextRoute()">Next</button>
+</div>

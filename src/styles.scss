@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+@import "styles/my-theme.scss";
+@import "styles/mixins.scss";
+
+
+html,body {
+    margin: 10 px;
+    padding: 10 px;
+    height: 100%;
+    font-family: sans-serif;
+    .light-theme {
+        // background-color: white;
+    }
+    .dark-theme {
+        background-color: #303030; 
+    }
+}
+
+.light-theme {
+    @include angular-material-theme($light-theme)
+}
+
+.dark-theme {
+    @include angular-material-theme($dark-theme)
+}
