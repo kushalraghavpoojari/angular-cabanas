@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutGap="30px" style="height: 60vh">
     <div fxLayout="column" fxLayoutGap="30px">
-            <div>Location Selected: {{selectedLocation.name}}</div>
+            <h4>Location Selected: {{selectedLocation.name}}</h4>
             <div fxLayout>
                 <input id="fileInput2" type="file" class="upload-input" (change)="onImageUpload($event)">
                 <button mat-raised-button color="primary" class="upload-button" (click)="uploadImage('fileInput2')">Upload</button>
