@@ -14,10 +14,23 @@ html,body {
     height: 100%;
     font-family: sans-serif;
     .light-theme {
-        // background-color: white;
+        h3, h4 {
+            color: $light-theme-text;
+        }
     }
     .dark-theme {
-        background-color: #303030; 
+        background-color: #303030;
+        
+        .mat-input-element {
+            color: $dark-theme-input-text;
+        }
+        .cdk-overlay-container {
+            opacity: 0.96;
+        }
+
+        h3, h4, pre {
+            color: $dark-theme-text;
+        }
     }
 }
 
@@ -27,4 +40,10 @@ html,body {
 
 .dark-theme {
     @include angular-material-theme($dark-theme)
+}
+
+// overrides
+
+mat-icon {
+    cursor: pointer;
 }

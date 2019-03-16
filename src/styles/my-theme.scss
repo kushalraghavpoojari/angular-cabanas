@@ -1,11 +1,22 @@
 @import '~@angular/material/theming';
 
+// Dark theme
 $dark-primary: mat-palette($mat-gray, A700);
 $dark-accent: mat-palette($mat-indigo);
 
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent);
 
+// Other colors for Dark Theme
+$dark-theme-input-text: white;
+$dark-theme-text: #b0b0b0;
+
+
+
+// Light theme
 $light-primary: mat-palette($mat-indigo);
 $light-accent: mat-palette($mat-pink);
 
 $light-theme: mat-light-theme($light-primary, $light-accent);
+
+//Other colors for light theme
+$light-theme-text: #00010cbf;
