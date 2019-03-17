@@ -39,6 +39,13 @@ export class CabanaInfoComponent implements OnInit {
 		});
 	}
 
+	removeControl():void {
+		const locationToBePoped = this.locations.pop();
+		this.cabanaInformationForm.removeControl(locationToBePoped.name);
+		this.cabanaInformationForm.removeControl(locationToBePoped.resources);
+		this.cabanaInformationForm.removeControl(locationToBePoped.resourceId);
+	}
+
 	notifyUser(type: string):void {
 		const characModalInfo = {
 				info :'Please follow "cabanapopup-[island-shorthand]-[cabana-type]" format',
@@ -59,8 +66,14 @@ export class CabanaInfoComponent implements OnInit {
 
 	buildLocations(event):void {
 		console.log(event.target.value)
+		const changedValue = event.target.value;
+
+		if (Number(changedValue) < this.locations.length) {
+			this.removeControl();
+		}
+
 		this.locations.length = 0;
-		for (let i = 0; i< event.target.value; i++) {
+		for (let i = 0; i< changedValue; i++) {
 			this.locations.push({
 				id: i,
 				name: `location${i}`,
