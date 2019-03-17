@@ -40,10 +40,10 @@ export class CabanaInfoComponent implements OnInit {
 	}
 
 	removeControl():void {
-		const locationToBePoped = this.locations.pop();
-		this.cabanaInformationForm.removeControl(locationToBePoped.name);
-		this.cabanaInformationForm.removeControl(locationToBePoped.resources);
-		this.cabanaInformationForm.removeControl(locationToBePoped.resourceId);
+		const locationPoped = this.locations.pop();
+		this.cabanaInformationForm.removeControl(locationPoped.name);
+		this.cabanaInformationForm.removeControl(locationPoped.resources);
+		this.cabanaInformationForm.removeControl(locationPoped.resourceId);
 	}
 
 	notifyUser(type: string):void {
