@@ -12,18 +12,28 @@ import { UserOptions } from './models/userOptions.model';
 export class AppComponent implements OnInit{
     title = 'cabanas-angular';
     userOptions:UserOptions;
-    @Input() enableModal:boolean = true;
-    @Input() enableSnackBar:boolean = false;
-    @Input() enableDarkMode:boolean = false;
+    isValidResolution: boolean = true;
+    @Input() enableModal: boolean = true;
+    @Input() enableSnackBar: boolean = false;
+    @Input() enableDarkMode: boolean = false;
     
     constructor(private overlay: OverlayContainer, private renderer: Renderer2, private sharedService: CabanaSharedService) { }
 
     ngOnInit() {
         this.userOptions = new UserOptions(this.enableDarkMode, this.enableModal, this.enableSnackBar);
         this.sharedService.setUserOptions(this.userOptions);
+        this.checkDeviceResolution();
+    }
+
+    checkDeviceResolution() {
+        if(window.innerWidth >= 1024 && window.innerHeight >= 635) {
+            this.isValidResolution = true;
+        } else {
+            this.isValidResolution = false;
+        }
     }
     
-    toggleDarkMode(event: MatSlideToggleChange) {
+    toggleDarkMode(event: MatSlideToggleChange): void {
         const containerElement = this.overlay.getContainerElement();
         this.enableDarkMode = event.checked;
         if (event.checked) {
@@ -42,14 +52,13 @@ export class AppComponent implements OnInit{
         this.userOptions.updateUserOptions(this.enableDarkMode, this.enableModal, this.enableSnackBar);
     }
 
-    toggleEnableModal(event: MatSlideToggleChange) {
+    toggleEnableModal(event: MatSlideToggleChange): void {
         this.enableModal = event.checked;
         this.enableSnackBar = !event.checked;
-        // this.sharedService.setMenuOptions();
         this.userOptions.updateUserOptions(this.enableDarkMode, this.enableModal, this.enableSnackBar);
     }
 
-    toggleEnableSnackBar(event: MatSlideToggleChange) {
+    toggleEnableSnackBar(event: MatSlideToggleChange): void {
         this.enableSnackBar = event.checked;
         this.enableModal = !event.checked;
         this.userOptions.updateUserOptions(this.enableDarkMode, this.enableModal, this.enableSnackBar);

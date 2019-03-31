@@ -39,7 +39,7 @@ import { AngularDraggableModule } from 'angular2-draggable';
 		FinalComponent,
 		ModalComponent
 	],
-	entryComponents: [ ModalComponent],
+	entryComponents: [ModalComponent],
 	imports: [
         BrowserModule,
         AppRoutingModule,
@@ -51,7 +51,7 @@ import { AngularDraggableModule } from 'angular2-draggable';
 		AngularDraggableModule,
 		HttpClientModule
 	],
-	providers: [ CabanaScalerService, CabanaSharedService ],
+	providers: [CabanaScalerService, CabanaSharedService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

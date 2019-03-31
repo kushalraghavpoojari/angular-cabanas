@@ -9,12 +9,10 @@ import { CabanaResourceSelectionComponent } from './cabana-resource-selection/ca
 import { CabanaResourceComponent } from './cabana-resource/cabana-resource.component';
 import { FinalComponent } from './final/final.component';
 
-export const routes: Routes = [
-    {
+export const routes: Routes = [{
         path: '',
         component: HomeComponent
-    },
-    {
+    }, {
         path: 'cabana',
         component: CabanaComponent,
         children: [{
