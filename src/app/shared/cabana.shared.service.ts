@@ -10,7 +10,7 @@ import { ModalComponent } from './Modal/modal.component';
 
 @Injectable()
 export class CabanaSharedService {
-    private numberOfLocations:number = 0;
+    private numberOfLocations: number = 0;
     private fullImageName: String = '';
     private island: String = '';
     private image: HTMLImageElement = null;
@@ -21,9 +21,12 @@ export class CabanaSharedService {
     private currentSelectedLocation: LocationModel;
     private userOptions: UserOptions;
 
-    constructor(private http: HttpClient, private scalerService: CabanaScalerService, public snackBar: MatSnackBar, public dialog: MatDialog) { }
+    constructor(private http: HttpClient,
+        private scalerService: CabanaScalerService,
+        public snackBar: MatSnackBar,
+        public dialog: MatDialog) { }
 
-    setImageName(isMapImage:boolean, locationIndex:number, imageName:string) {
+    setImageName(isMapImage: boolean, locationIndex: number, imageName: string) {
         if (isMapImage) {
             this.cabana.setImageName(imageName);
         } else {
