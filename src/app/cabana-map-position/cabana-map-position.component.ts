@@ -22,7 +22,10 @@ export class CabanaMapPositionComponent implements OnInit {
         this.sendStateEvent();
     }
 
-    sendStateEvent() {
+    /**
+	 * Send Current State
+	 */
+    sendStateEvent(): void {
 		this.sharedService.stateChanged(2);
 	}
     

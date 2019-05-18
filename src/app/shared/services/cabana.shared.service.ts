@@ -20,8 +20,6 @@ import { ModalComponent } from '../components/Modal/modal.component';
 @Injectable()
 export class CabanaSharedService {
     private numberOfLocations: number = 0;
-    private fullImageName: String = '';
-    private island: String = '';
     private image: HTMLImageElement = null;
     private diameter: number = 0;
     private radius: number = 0;
@@ -38,7 +36,11 @@ export class CabanaSharedService {
         public snackBar: MatSnackBar,
         public dialog: MatDialog) { }
 
-
+    
+    /**
+     * Broad cast state change
+     * @param stateInfo state number
+     */
     stateChanged(stateInfo: number) {
         this.stateSource.next(stateInfo);
     }
@@ -53,8 +55,6 @@ export class CabanaSharedService {
         const currentCabanaLocations = [];
         
         this.numberOfLocations = +formValues.numberOfLocations;
-        this.island = formValues.island;
-        this.fullImageName = formValues.imageName;
         
         for (let i = 0; i< this.numberOfLocations; i++) {
             let numOfResources = formValues[`location-${i}-resources`];

@@ -24,7 +24,10 @@ export class FinalComponent implements OnInit {
         this.getOutputObject();
     }
 
-    sendStateEvent() {
+    /**
+	 * Send Current State
+	 */
+    sendStateEvent(): void {
 		this.sharedService.stateChanged(5);
 	}
 
