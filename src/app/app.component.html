@@ -17,7 +17,11 @@
         <router-outlet></router-outlet>
     </div>
     
-    <div *ngIf="!isValidResolution" fxLayout="row" fxLayoutAlign="center center">
-        <div>Please use a desktop browser with valid resolution!</div>
+    <div *ngIf="!isValidResolution" fxLayout="column" fxLayoutAlign="center center">
+        <img src="assets/sorry.jpg" alt="Sorry!" class="responsive">
+        <div fxLayout="row">
+            <h3 fxFlexAlign="center">Sorry!</h3>
+        </div>
+        <h4>Application not supported on this device. Please use a desktop browser with a min resolution of 1024 x 635</h4>
     </div>
 </div>
