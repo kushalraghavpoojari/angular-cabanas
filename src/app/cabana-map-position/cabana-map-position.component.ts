@@ -19,7 +19,15 @@ export class CabanaMapPositionComponent implements OnInit {
 
 	ngOnInit() {
         this.locations = this.sharedService.getLocations();
+        this.sendStateEvent();
     }
+
+    /**
+	 * Send Current State
+	 */
+    sendStateEvent(): void {
+		this.sharedService.stateChanged(2);
+	}
     
     /**
      * On image upload

@@ -3,6 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 import { MatSnackBar, MatDialog } from '@angular/material';
+import { BehaviorSubject } from 'rxjs';
 
 import { CabanaModel } from '../../models/cabana.model';
 import { ResourceModel } from '../../models/resource.model';
@@ -19,13 +20,13 @@ import { ModalComponent } from '../components/Modal/modal.component';
 @Injectable()
 export class CabanaSharedService {
     private numberOfLocations: number = 0;
-    private fullImageName: String = '';
-    private island: String = '';
     private image: HTMLImageElement = null;
     private diameter: number = 0;
     private radius: number = 0;
     private locations: Array<LocationModel>;
     private currentSelectedLocation: LocationModel;
+    private stateSource = new BehaviorSubject<number>(1);
+    public currentState = this.stateSource.asObservable();
 
     constructor(
         @Inject(DOCUMENT) private document: Document,
@@ -34,6 +35,16 @@ export class CabanaSharedService {
         private dataService: CabanaDataService,
         public snackBar: MatSnackBar,
         public dialog: MatDialog) { }
+
+    
+    /**
+     * Broadcast state change
+     * @param stateInfo state number
+     */
+    stateChanged(stateInfo: number) {
+        this.stateSource.next(stateInfo);
+    }
+
 
     /**
      * Creates a Cabana and sets Cabana Information
@@ -44,8 +55,6 @@ export class CabanaSharedService {
         const currentCabanaLocations = [];
         
         this.numberOfLocations = +formValues.numberOfLocations;
-        this.island = formValues.island;
-        this.fullImageName = formValues.imageName;
         
         for (let i = 0; i< this.numberOfLocations; i++) {
             let numOfResources = formValues[`location-${i}-resources`];

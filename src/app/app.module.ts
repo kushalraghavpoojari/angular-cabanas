@@ -27,6 +27,7 @@ import { CabanaSharedService } from './shared/services/cabana.shared.service';
 import { CabanaDataService } from './shared/services/cabana.data.service';
 
 import { AngularDraggableModule } from 'angular2-draggable';
+import { StepperComponent } from './stepper/stepper.component';
 
 @NgModule({
 	declarations: [
@@ -38,6 +39,7 @@ import { AngularDraggableModule } from 'angular2-draggable';
 		CabanaLocationSelectionComponent,
 		CabanaResourceComponent,
 		FinalComponent,
+		StepperComponent,
 		ModalComponent
 	],
 	entryComponents: [ModalComponent],

@@ -1,0 +1,29 @@
+.state-card {
+    padding-right: 10px;
+    .step-icon {
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
+    & .active {
+        background-color: #3f51b5;
+    }
+    & .inactive {
+        background-color: gray;
+    }
+    & .active-state {
+        color:  #3f51b5;
+    }
+    .margin-top-4 {
+        margin-top: 4px;
+    }
+    .spacer {
+        border-top-width: 2px;
+        border-top-style: solid;
+        min-width: 32px;
+        margin: 12px 0;
+        flex: auto;
+        height: 0;
+    }
+}

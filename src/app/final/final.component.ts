@@ -18,10 +18,18 @@ export class FinalComponent implements OnInit {
     constructor(@Inject(DOCUMENT) private document: Document, private sharedService: CabanaSharedService) { }
 
     ngOnInit() {
+        this.sendStateEvent();
         this.cabana = this.sharedService.getCabana();
         this.locations = this.sharedService.getLocations() || [];
         this.getOutputObject();
     }
+
+    /**
+	 * Send Current State
+	 */
+    sendStateEvent(): void {
+		this.sharedService.stateChanged(5);
+	}
 
     /**
      * Get final output object
