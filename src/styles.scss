@@ -28,7 +28,7 @@ html,body {
         }
 
         h3, h4, pre {
-            color: $dark-theme-text;
+            color: $dark-theme-text !important;
         }
     }
 }

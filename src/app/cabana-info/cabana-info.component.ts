@@ -31,7 +31,13 @@ export class CabanaInfoComponent implements OnInit {
 			imageName: ['', Validators.required],
 			island: ['', Validators.required],
 		});
+		this.sendStateEvent();
 	}
+
+	sendStateEvent() {
+		this.sharedService.stateChanged(1);
+	}
+
 
 	/**
 	 * Notify User about selected field

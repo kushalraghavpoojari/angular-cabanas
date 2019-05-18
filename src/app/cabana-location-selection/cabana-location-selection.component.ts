@@ -21,6 +21,11 @@ export class CabanaLocationSelectionComponent implements OnInit {
 				location.isSelected = false;
 			}
 		});
+		this.sendStateEvent();
+	}
+
+	sendStateEvent() {
+		this.sharedService.stateChanged(3);
 	}
 
 	/**

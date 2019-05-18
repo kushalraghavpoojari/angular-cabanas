@@ -22,7 +22,12 @@ export class CabanaResourceComponent implements OnInit {
     
 	ngOnInit() {
         this.locations = this.sharedService.getLocations();
+        this.sendStateEvent();
     }
+
+    sendStateEvent() {
+		this.sharedService.stateChanged(4);
+	}
 
     /**
      * On image upload

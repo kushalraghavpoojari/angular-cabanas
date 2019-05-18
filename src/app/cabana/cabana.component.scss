@@ -10,4 +10,7 @@
         cursor: pointer;
         @include transform(30px, 1.2);
     }
+    .no-margin {
+        margin: 0 !important;
+    }
 }

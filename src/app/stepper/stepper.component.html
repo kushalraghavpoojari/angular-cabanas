@@ -1,0 +1,11 @@
+<div fxLayout="row">
+    <div *ngFor="let state of states; index as i">
+        <div fxLayout="row" fxLayoutGap="10px" class="state-card" >
+            <div class="step-icon" [ngClass]="{'active': state.active, 'inactive': !state.active}">
+                <span class="margin-top-4" fxLayoutAlign="center center">{{state.number}}</span>
+            </div>
+            <h4 class="margin-top-4" [ngClass]="{'active-state': state.active}">{{state.name}}</h4>
+            <div class="spacer" *ngIf="states.length-1>i"></div>
+        </div>
+    </div>
+</div>
