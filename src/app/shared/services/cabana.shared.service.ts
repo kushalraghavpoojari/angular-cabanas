@@ -38,7 +38,7 @@ export class CabanaSharedService {
 
     
     /**
-     * Broad cast state change
+     * Broadcast state change
      * @param stateInfo state number
      */
     stateChanged(stateInfo: number) {
