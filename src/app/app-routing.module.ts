@@ -5,7 +5,7 @@ import { CabanaComponent } from './cabana/cabana.component';
 
 import { CabanaInfoComponent } from './cabana-info/cabana-info.component';
 import { CabanaMapPositionComponent } from './cabana-map-position/cabana-map-position.component';
-import { CabanaResourceSelectionComponent } from './cabana-resource-selection/cabana-resource-selection.component';
+import { CabanaLocationSelectionComponent } from './cabana-location-selection/cabana-location-selection.component';
 import { CabanaResourceComponent } from './cabana-resource/cabana-resource.component';
 import { FinalComponent } from './final/final.component';
 
@@ -22,8 +22,8 @@ export const routes: Routes = [{
                 path: 'cabana-map-position',
                 component: CabanaMapPositionComponent
             }, {
-                path: 'cabana-resource-selection',
-                component: CabanaResourceSelectionComponent
+                path: 'cabana-location-selection',
+                component: CabanaLocationSelectionComponent
             }, {
                 path: 'cabana-resource',
                 component: CabanaResourceComponent

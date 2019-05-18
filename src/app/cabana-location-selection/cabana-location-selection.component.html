@@ -2,7 +2,7 @@
     <h3>Select a Location</h3>
     <div fxLayout="row" fxLayoutGap="30px">
         <div *ngFor="let location of locations" [ngClass]="{'location': !location.coordinatesAdded, 'location-disabled': location.coordinatesAdded}">
-            <mat-card (click)="selectedResourceLocation(location)" [ngClass]="{'selected': location.isSelected, 'disabled': location.coordinatesAdded}">
+            <mat-card (click)="selectLocation(location)" [ngClass]="{'selected': location.isSelected, 'disabled': location.coordinatesAdded}">
                 {{location.name}}
             </mat-card>
         </div>

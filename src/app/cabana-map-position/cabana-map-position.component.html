@@ -1,28 +1,28 @@
 <div fxLayout="column" fxLayoutGap="30px" style="height: 60vh">
-   <div fxLayout fxLayoutGap="30px">
-        <div fxLayout>
-            <input id="fileInput" type="file" class="upload-input" (change)="onImageUpload($event)">
-            <button mat-raised-button color="primary" class="upload-button" (click)="uploadImage('fileInput')">Upload</button>
-            <button mat-button mat-raised-button color="primary" (click)="addBubble()" [disabled]="bubbleAdded">Add Bubble</button>
-        </div>
-   </div>
-    <div class="cabana-view" id="cabana-view">
-        <div 
-            ngDraggable
-            ngResizable
-            *ngFor="let location of locations; index as i"
-            class="circleElement resizable-widget"
-            id="dragable-element-{{i}}"
-            [rzHandles]="'all'"
-            [rzAspectRatio]="'1'"
-            (rzStop)="onResizeStop($event, i)"
-            (endOffset)="onMoveEnd($event, i)"
-        >
-            <span class="circle-text" id="cabana-name-{{i}}">{{location.name}}</span>
-        </div>
-    </div>
-</div>
-<div fxLayout fxLayoutGap="15px">
-	<button mat-button mat-raised-button (click)="goBack()">Back</button>
-    <button mat-button mat-raised-button color="primary" [disabled]="!bubbleAdded" (click)="onClickNext()">Next</button>
-</div>
+	<div fxLayout fxLayoutGap="30px">
+		 <div fxLayout>
+			 <input id="fileInput" type="file" class="upload-input" (change)="onImageUpload($event)">
+			 <button mat-raised-button color="primary" class="upload-button" (click)="uploadImage('fileInput')">Upload</button>
+			 <button mat-button mat-raised-button color="primary" (click)="addBubble()" [disabled]="bubbleAdded">Add Bubble</button>
+		 </div>
+	</div>
+	 <div class="cabana-view" id="cabana-view">
+		 <div 
+			 ngDraggable
+			 ngResizable
+			 *ngFor="let location of locations; index as i"
+			 class="circleElement resizable-widget"
+			 id="dragable-element-{{i}}"
+			 [rzHandles]="'all'"
+			 [rzAspectRatio]="'1'"
+			 (rzStop)="onResizeStop($event, i)"
+			 (endOffset)="onMoveEnd($event, i)"
+		 >
+			 <span class="circle-text" id="cabana-name-{{i}}">{{location.name}}</span>
+		 </div>
+	 </div>
+ </div>
+ <div fxLayout fxLayoutGap="15px">
+	 <button mat-button mat-raised-button (click)="goBack()">Back</button>
+	 <button mat-button mat-raised-button color="primary" [disabled]="!bubbleAdded" (click)="onClickNext()">Next</button>
+ </div>

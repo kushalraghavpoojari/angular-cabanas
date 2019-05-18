@@ -5,18 +5,28 @@ export class CabanaScalerService {
     parentViewWidth = 950;
     widthOffset = 0;
 
-    setScaleFactorToImage(image) {
+    /**
+     * Sets scale factor to image
+     * @param image image
+     */
+    setScaleFactorToImage(image: HTMLImageElement): void {
         const heightRatio = this.maxHeight / image.height;
         const widthratio = this.maxWidth / image.width;
         this.scaleFactor = Math.min(heightRatio, widthratio, 1);
         this.widthOffset = (this.parentViewWidth - (this.scaleFactor * image.width))/2;
     }
 
-    getCurrentScaleFactor() {
+    /**
+     * Get Current Scale Factor
+     */
+    getCurrentScaleFactor(): number {
         return this.scaleFactor;
     }
 
-    getWidthOffset() {
+    /**
+     * Get Width Offset
+     */
+    getWidthOffset(): number {
         return this.widthOffset;
     }
 }

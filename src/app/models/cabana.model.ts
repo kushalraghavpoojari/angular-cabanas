@@ -1,17 +1,23 @@
 import { LocationModel } from './location.model';
 
-export class Cabana {
-    public name: string;
-    public imageName: string;
-    public locations: Array<LocationModel>;
+export class CabanaModel {
 
-    constructor(name: string, imageName: string, locations: Array<LocationModel>) {
-        this.name = name;
-        this.imageName = imageName;
-        this.locations = locations;
+    constructor(private name: string, private imageName: string, private locations: Array<LocationModel>) {
     }
 
     setImageName(name: string) {
         this.imageName = name;
+    }
+
+    getImageName(): string {
+        return this.imageName;
+    }
+
+    getCabanaName(): string {
+        return this.name;
+    }
+
+    getLocations(): Array<LocationModel> {
+        return this.locations;
     }
 }

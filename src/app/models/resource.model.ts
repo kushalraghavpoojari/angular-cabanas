@@ -1,4 +1,4 @@
-export class Resource {
+export class ResourceModel {
     private x: number;
     private y: number;
     public resourceId: number;
@@ -13,21 +13,21 @@ export class Resource {
         this.height = height;
     }
 
-    setXY(x: number, y:number) {
+    setXYCoordinates(x: number, y:number) {
         this.x = x;
         this.y = y;
+    }
+
+    getXYCoordinates() {
+        return {
+            x: this.x,
+            y: this.y
+        };
     }
 
     setDimensions(width: number, height: number) {
         this.width = width;
         this.height = height;
-    }
-
-    getXY() {
-        return {
-            x: this.x,
-            y: this.y
-        };
     }
 
     getDimensions() {

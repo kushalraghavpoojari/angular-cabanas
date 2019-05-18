@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { CabanaSharedService } from '../shared/cabana.shared.service';
+import { CabanaSharedService } from '../shared/services/cabana.shared.service';
 import { Router } from '@angular/router';
+import { UserOptionsModel } from '../models/userOptions.model';
 
 @Component({
 	selector: 'app-cabana-info',
@@ -16,37 +17,27 @@ export class CabanaInfoComponent implements OnInit {
 				'brevard', 'demo', 'demoUS', 'demoSWPOC', 'demoSki', 'demoCulture', 'DemoHK', 'DemoUK', 'SixFlagsV3'
 			];
 	locations = [];
+	captureImageDetails: boolean = false;
 
 	constructor(private formBuilder: FormBuilder,
 		private sharedService: CabanaSharedService,
 		private router: Router) { }
 
 	ngOnInit() {
+		const userOptions: UserOptionsModel = this.sharedService.getUserOptions();
 		this.cabanaInformationForm = this.formBuilder.group({
 			charac: ['', Validators.required],
 			numberOfLocations: ['', Validators.required],
 			imageName: ['', Validators.required],
 			island: ['', Validators.required],
 		});
-		console.log(this.sharedService.getUserOptions());
 	}
 
-	addControl():void {
-		this.locations.forEach((location) => {
-			this.cabanaInformationForm.addControl(location.name, new FormControl('', Validators.required));
-			this.cabanaInformationForm.addControl(location.resources, new FormControl('', Validators.required));
-			this.cabanaInformationForm.addControl(location.resourceId, new FormControl());
-		});
-	}
-
-	removeControl():void {
-		const locationPoped = this.locations.pop();
-		this.cabanaInformationForm.removeControl(locationPoped.name);
-		this.cabanaInformationForm.removeControl(locationPoped.resources);
-		this.cabanaInformationForm.removeControl(locationPoped.resourceId);
-	}
-
-	notifyUser(type: string):void {
+	/**
+	 * Notify User about selected field
+	 * @param filed notification field
+	 */
+	notifyUser(field: string): void {
 		const characModalInfo = {
 				info :'Please follow "cabanapopup-[island-shorthand]-[cabana-type]" format',
 				additionalInfo: 'Eg: cabanapopup-pelc-standard'
@@ -57,23 +48,26 @@ export class CabanaInfoComponent implements OnInit {
 			},
 			characSnackbarInfo = 'Please follow "cabanapopup-[island-shorthand]-[cabana-type]" format',
 			imageSnackBarInfo = 'Please enter the full map image name with extension';
-		if (type === 'charac') {
+		if (field === 'charac') {
 			this.sharedService.notifyUser(characModalInfo, characSnackbarInfo);
-		} else if (type === 'image') {
+		} else if (field === 'image') {
 			this.sharedService.notifyUser(imageModalInfo, imageSnackBarInfo);
 		}
 	}
 
-	buildLocations(event):void {
-		console.log(event.target.value)
-		const changedValue = event.target.value;
+	/**
+	 * Build Locations
+	 * @param event mouse blurr event
+	 */
+	buildLocations(event: MouseEvent): void {
+		const changedValue = +(<HTMLInputElement>event.target).value;
 
-		if (Number(changedValue) < this.locations.length) {
+		if (changedValue < this.locations.length) {
 			this.removeControl();
 		}
 
 		this.locations.length = 0;
-		for (let i = 0; i< changedValue; i++) {
+		for (let i = 0; i < changedValue; i++) {
 			this.locations.push({
 				id: i,
 				name: `location${i}`,
@@ -84,7 +78,32 @@ export class CabanaInfoComponent implements OnInit {
 		this.addControl();
 	}
 
-	onClickNext():void {
+	/**
+	 * Add Control to the form
+	 */
+	addControl(): void {
+		this.locations.forEach((location) => {
+			this.cabanaInformationForm.addControl(location.name, new FormControl('', Validators.required));
+			this.cabanaInformationForm.addControl(location.resources, new FormControl('', Validators.required));
+			this.cabanaInformationForm.addControl(location.resourceId, new FormControl());
+		});
+	}
+
+	/**
+	 * Remove control from the form
+	 */
+	removeControl(): void {
+		const locationPoped = this.locations.pop();
+		this.cabanaInformationForm.removeControl(locationPoped.name);
+		this.cabanaInformationForm.removeControl(locationPoped.resources);
+		this.cabanaInformationForm.removeControl(locationPoped.resourceId);
+	}
+	
+
+	/**
+	 * Navigate on click
+	 */
+	onClickNext(): void {
 		const formValues = this.cabanaInformationForm.value;
 		this.sharedService.setCabanaInformation(formValues);
 		if (this.cabanaInformationForm.status === 'VALID') {

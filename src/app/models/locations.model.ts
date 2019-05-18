@@ -1,6 +1,6 @@
 import { LocationModel } from './location.model';
 
-export class Locations {
+export class LocationsModel {
     public locations: Array<LocationModel>;
 
     constructor(locations: Array<LocationModel>) {

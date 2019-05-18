@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CabanaSharedService } from '../shared/cabana.shared.service';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { CabanaSharedService } from '../shared/services/cabana.shared.service';
 import { Router } from '@angular/router';
 import { LocationModel } from '../models/location.model';
+import { IResizeEvent } from 'angular2-draggable/lib/models/resize-event';
 
 @Component({
 	selector: 'app-cabana-map-position',
@@ -12,46 +14,63 @@ export class CabanaMapPositionComponent implements OnInit {
     bubbleAdded: Boolean = false;
     numberOfBubblesAdded: number = 0;
     locations:Array<LocationModel>;
-    
-    @Input() stepper;
 
-	constructor(private sharedService: CabanaSharedService, private router:Router) { 
-    }
+	constructor(@Inject(DOCUMENT) private document: Document, private sharedService: CabanaSharedService, private router:Router) {}
 
 	ngOnInit() {
         this.locations = this.sharedService.getLocations();
     }
     
-    onImageUpload(event) {
-        this.sharedService.uploadImage(event.target.files[0], true, 'cabana-view', 'cabana-full-map', true, undefined);
+    /**
+     * On image upload
+     * @param event mouse event
+     */
+    onImageUpload(event: MouseEvent): void {
+        this.sharedService.uploadImage((<HTMLInputElement>event.target).files[0], true, 'cabana-view', 'cabana-full-map', -1);
     }
 
-    uploadImage(id: string) {
-        const element = document.getElementById(id);
+    /**
+     * Upload Image
+     * @param id element id
+     */
+    uploadImage(id: string): void {
+        const element = this.document.getElementById(id);
         element.click();
     }
 
-    onResizeStop(event, index: number) {
-        console.log(event.size.width, index)
-        this.sharedService.setRadius(event.size.width, true, index);
-        this.applyLocationNameStyles(event.size.width, index);
+    /**
+     * Set Radus and apply styles on resize stop
+     * @param event resize event
+     * @param locationIndex location index 
+     */
+    onResizeStop(event: IResizeEvent, locationIndex: number): void {
+        this.sharedService.setRadius(event.size.width, true, locationIndex);
+        this.applyLocationNameStyles(locationIndex, event.size.width);
     }
 
-    addBubble() {
-        let dragElement = document.getElementById(`dragable-element-${this.numberOfBubblesAdded}`);
+    /**
+     * Add Location Bubble on map
+     */
+    addBubble(): void {
+        const dragElement = this.document.getElementById(`dragable-element-${this.numberOfBubblesAdded}`);
         dragElement.style.display = 'block';
-        this.applyLocationNameStyles(undefined, this.numberOfBubblesAdded);
+        this.applyLocationNameStyles(this.numberOfBubblesAdded);
         if (this.numberOfBubblesAdded < this.locations.length) {
             this.numberOfBubblesAdded++;
             this.bubbleAdded = this.numberOfBubblesAdded === this.locations.length;
         }
     }
 
-    applyLocationNameStyles(diameter: number = 150, index: number) {
+    /**
+     * Apply styles to location name in bubble
+     * @param diameter diameter of location bubble
+     * @param locationIndex location index
+     */
+    applyLocationNameStyles(locationIndex: number, diameter: number = 150): void {
         const radius = diameter / 2;
         this.locations.forEach((location, i) => {
-            if (index === i) {
-                const locationElement = document.getElementById(`cabana-name-${i}`);
+            if (locationIndex === i) {
+                const locationElement = this.document.getElementById(`cabana-name-${i}`);
                 locationElement.style.width = `${diameter-2}px`;
                 locationElement.style.top = `${radius-10}px`;
                 locationElement.style.left = `1px`;
@@ -60,16 +79,27 @@ export class CabanaMapPositionComponent implements OnInit {
         });
     }
 
-    onMoveEnd(event, index: number) {
-        this.sharedService.onMoveEnd(event, { x: 154, y: 0 }, index, false);
+    /**
+     * Move End Event
+     * @param event move end event
+     * @param index 
+     */
+    onMoveEnd(event: MouseEvent, index: number): void {
+        this.sharedService.onMoveEnd(event, { x: 154, y: 0 }, index);
     }
 
-    goBack() {
+    /**
+     * Navigate to previous route
+     */
+    goBack(): void {
         this.router.navigate(['/cabana']);
     }
 
-    onClickNext() {
-        this.router.navigate(['/cabana/cabana-resource-selection']);
+    /**
+     * Navigate to next route
+     */
+    onClickNext(): void {
+        this.router.navigate(['/cabana/cabana-location-selection']);
     }
 
 }

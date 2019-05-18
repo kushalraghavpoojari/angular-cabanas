@@ -2,11 +2,11 @@
 <form [formGroup]="cabanaInformationForm" style="height: 60vh">
 	<div fxLayout="row">
 		<div fxLayout="column">
-			<h4>Cabana Information</h4>
+			<h4 class="color-primary">Cabana Information</h4>
 			<div>
 				<mat-form-field appearance="fill">
 					<mat-label>Cabana charac</mat-label>
-					<input matInput formControlName="charac" pattern="[a-zA-Z ]*" required>
+					<input matInput formControlName="charac" pattern="[a-z-A-Z ]*" required>
 					<mat-error *ngIf="cabanaInformationForm.get('charac').hasError('required')">Charac must not be empty</mat-error>
 					<mat-error *ngIf="cabanaInformationForm.get('charac').hasError('pattern')">Charac pattern doesn't match</mat-error>
 				</mat-form-field>
@@ -20,8 +20,8 @@
 				</mat-form-field>
 			</div>
 		</div>
-		<div fxFlexOffset="100px" fxLayout="column">
-			<h4>Cabana Image Information</h4>
+		<div fxFlexOffset="100px" fxLayout="column" fxLayoutGap="10px">
+			<h4 class="color-primary">Cabana Image Information</h4>
 			<div>
 				<mat-form-field appearance="fill">
 					<mat-label>Image name</mat-label>
@@ -39,7 +39,7 @@
 					<mat-error *ngIf="cabanaInformationForm.get('island').hasError('pattern')">Island pattern doesn't match</mat-error>
 				</mat-form-field>
 			</div>
-			<div>
+			<!-- <div>
 				<mat-form-field appearance="fill">
 					<mat-select placeholder="Island">
 						<mat-option *ngFor="let island of islands" [value]="island">
@@ -47,11 +47,11 @@
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
-			</div>
+			</div> -->
 		</div>
 
 		<div fxFlexOffset="100px" fxLayout="column" *ngIf="locations.length">
-			<h4>Cabana Location Information</h4>
+			<h4 class="color-primary">Cabana Location Information</h4>
 			<mat-accordion>
 				<div *ngFor="let location of locations; index as i">
 					<mat-expansion-panel [ngClass]="{'error-border': (cabanaInformationForm.get(location.name).errors !== null && cabanaInformationForm.get(location.name).touched) || (cabanaInformationForm.get(location.resources).errors !== null && cabanaInformationForm.get(location.resources).touched)}">
